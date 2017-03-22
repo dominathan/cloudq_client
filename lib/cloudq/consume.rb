@@ -14,7 +14,7 @@ module Cloudq
     end
 
     def get(&block)
-      resp = RestClient.get(:url => url, {:timeout => 300, :open_timeout => 300})
+      resp = RestClient.get(url, {:timeout => 300, :open_timeout => 300})
       if resp.code == 200
         result = JSON.parse(resp)
         return nil if result['status'] == 'empty'
