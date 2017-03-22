@@ -29,8 +29,7 @@ describe Cloudq::Consume do
   #   it 'consumes job' do
   #     subject.job.should == '{"status": "empty"}'
   #   end
-
+  #
   # end
 
 end
-

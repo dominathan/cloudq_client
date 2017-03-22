@@ -14,22 +14,22 @@ module Cloudq
     end
 
     def get(&block)
-      resp = RestClient.get(url, {:timeout => 300, :open_timeout => 300})
-      if resp.code == 200
-        result = JSON.parse(resp)
-        return nil if result['status'] == 'empty'
-        yield result
-        result
-      end
-
-      # RestClient.get url do |response|
-      #   if response.code == 200
-      #     result = JSON.parse(response)
-      #     return nil if result['status'] == 'empty'
-      #     yield result
-      #     result
-      #   end
+      # resp = RestClient::Request.execute(:method => :get, :url => url, :timeout => 300, :open_timeout => 300)
+      # if resp.code == 200
+      #   result = JSON.parse(resp)
+      #   return nil if result['status'] == 'empty'
+      #   yield result
+      #   result
       # end
+
+      RestClient.get url do |response|
+        if response.code == 200
+          result = JSON.parse(response)
+          return nil if result['status'] == 'empty'
+          yield result
+          result
+        end
+      end
     end
 
     def delete(job_id)
